@@ -19,6 +19,6 @@ the users about these as well.
 
 Current Capabilities: 
 
-Version 0.0.1
+Version 0.0.1:
 The application can scrape the dynamic website and return the full alert messages for the E line
 webpage. 
