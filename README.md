@@ -16,3 +16,9 @@ at the subscribers to the alert messaging system and send out a text message abo
 Beyond alerts this will also scan the website for significant delays for the E line and alert 
 the users about these as well. 
 
+
+Current Capabilities: 
+
+Version 0.0.1
+The application can scrape the dynamic website and return the full alert messages for the E line
+webpage. 
