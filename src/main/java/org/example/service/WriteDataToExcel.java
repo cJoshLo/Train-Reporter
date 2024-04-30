@@ -38,7 +38,7 @@ public class WriteDataToExcel {
         Set<String> keyid = alertData.keySet();
         int rowid = 0;
 
-        // writing the data into the sheets...
+        // writing the data into the sheets
             for (String key : keyid) {
 
             row = spreadsheet.createRow(rowid++);
