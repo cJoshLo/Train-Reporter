@@ -1,8 +1,13 @@
 package org.example.service;
 
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.List;
+
 public class MyController {
-    public void controlELineAlertScrapper(){
+    public List<WebElement> controlELineAlertScrapper(ChromeDriver driver){
         ScraperService scraperService = new ScraperService();
-        scraperService.scrape();
+        return scraperService.scrape(driver);
     }
 }
