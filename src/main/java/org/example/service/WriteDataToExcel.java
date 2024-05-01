@@ -74,6 +74,7 @@ public class WriteDataToExcel {
             found = false;
             Row newrow = newrowIterator.next();
             Cell newBodyContent = newrow.getCell(2);
+            oldrowIterator = oldsheet.iterator();
             while (oldrowIterator.hasNext()){
                 Row oldrow = oldrowIterator.next();
                 Cell oldBodyContent = oldrow.getCell(2);
