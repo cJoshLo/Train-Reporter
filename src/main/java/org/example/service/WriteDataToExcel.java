@@ -46,14 +46,14 @@ public class WriteDataToExcel {
                 cell.setCellValue((String)obj);
             }
         }
-        FileOutputStream out = new FileOutputStream(new File("C:/Users/lopez/OneDrive/Desktop/Projects/Development/alerts/newAlerts.xlsx"));
+        FileOutputStream out = new FileOutputStream(new File(System.getenv("Alerts") + "/newAlerts.xlsx"));
             workbook.write(out);
             out.close();
     }
 
     public List<Alert> compareExcelFiles() throws IOException {
-        FileInputStream oldFile = new FileInputStream(new File("C:/Users/lopez/OneDrive/Desktop/Projects/Development/alerts/oldAlerts.xlsx"));
-        FileInputStream newfile = new FileInputStream(new File("C:/Users/lopez/OneDrive/Desktop/Projects/Development/alerts/newAlerts.xlsx"));
+        FileInputStream oldFile = new FileInputStream(new File(System.getenv("Alerts") + "/oldAlerts.xlsx"));
+        FileInputStream newfile = new FileInputStream(new File(System.getenv("Alerts") + "/newAlerts.xlsx"));
         //Create Workbook instance holding reference to .xlsx file
         XSSFWorkbook oldWorkbook = new XSSFWorkbook(oldFile);
         XSSFWorkbook newWorkbook = new XSSFWorkbook(newfile);
@@ -95,9 +95,9 @@ public class WriteDataToExcel {
     }
 
     public void saveOverOldAlerts() throws IOException {
-        FileInputStream file = new FileInputStream(new File("C:/Users/lopez/OneDrive/Desktop/Projects/Development/alerts/newAlerts.xlsx"));
+        FileInputStream file = new FileInputStream(new File(System.getenv("Alerts") + "/newAlerts.xlsx"));
         Workbook wb = WorkbookFactory.create(file);
-        FileOutputStream fileout = new FileOutputStream("C:/Users/lopez/OneDrive/Desktop/Projects/Development/alerts/oldAlerts.xlsx");
+        FileOutputStream fileout = new FileOutputStream(System.getenv("Alerts") + "/oldAlerts.xlsx");
         wb.write(fileout);
         fileout.close();
     }

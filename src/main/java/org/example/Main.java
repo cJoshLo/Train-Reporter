@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.configuation.SeleniumConfig;
 import org.example.service.MyController;
+import org.example.service.SendSMS;
 import org.example.service.WriteDataToExcel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -40,7 +41,8 @@ public class Main {
 
         //full list of new alerts, already compared with old alerts file
         List<Alert> alertsToSend = writter.compareExcelFiles();
-
+        SendSMS sendSMS = new SendSMS();
+        sendSMS.sendSMS(alertsToSend);
         //saves the new alerts in the old alerts file so it can be compared later
         writter.saveOverOldAlerts();
 
