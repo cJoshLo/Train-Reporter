@@ -18,7 +18,6 @@ public class ScraperService {
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         final List<WebElement> alerts = driver.findElements(By.className("RouteRiderAlerts___StyledDiv3-sc-13vycjo-4"));
         final List<WebElement> alertList = alerts.getFirst().findElements(By.tagName("li"));
-//        alertList.forEach(alert -> System.out.println(alert.getText()));
         return alertList;
     }
 }

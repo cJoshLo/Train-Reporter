@@ -22,3 +22,8 @@ Current Capabilities:
 Version 0.0.1:
 The application can scrape the dynamic website and return the full alert messages for the E line
 webpage. 
+
+Version 0.0.2: Application can now take the scraped html content and break it into categories and save it to an excel file.
+
+Version 0.0.3: Application can now determine if the Alerts on the webpage are new from the last time the application was run. 
+

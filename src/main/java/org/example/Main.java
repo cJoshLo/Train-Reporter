@@ -18,9 +18,11 @@ public class Main {
         ChromeDriver driver = seleniumConfig.driver();
         MyController controller = new MyController();
         List<WebElement> alertList = controller.controlELineAlertScrapper(driver);
+
         List<WebElement> headers = new ArrayList<>();
         List<WebElement> subheaders = new ArrayList<>();
         List<WebElement> bodyContents = new ArrayList<>();
+
         for(int i = 0; i < alertList.size(); i ++){
             WebElement singleAlert = alertList.get(i);
             WebElement header = singleAlert.findElement(By.className("Heading-a3mmj6-0"));
@@ -31,14 +33,16 @@ public class Main {
             bodyContents.add(bodyContent);
         }
 
-        for(int i = 0; i < headers.size(); i ++){
-            System.out.println("Header: " + headers.get(i).getText());
-            System.out.println("SubHeader: " + subheaders.get(i).getText());
-            System.out.println("Body content: " + bodyContents.get(i).getText());
-            WriteDataToExcel writter = new WriteDataToExcel();
-            writter.writeToExcel(headers, subheaders, bodyContents);
-        }
+        WriteDataToExcel writter = new WriteDataToExcel();
 
+        //create newAlerts excel file
+        writter.writeToExcel(headers, subheaders, bodyContents);
+
+        //full list of new alerts, already compared with old alerts file
+        List<Alert> alertsToSend = writter.compareExcelFiles();
+
+        //saves the new alerts in the old alerts file so it can be compared later
+        writter.saveOverOldAlerts();
 
 
         driver.quit();

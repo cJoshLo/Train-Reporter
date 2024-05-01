@@ -1,19 +1,17 @@
 package org.example.service;
-import java.io.File;
+import java.io.*;
+
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.example.Alert;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 public class WriteDataToExcel {
 
@@ -40,21 +38,66 @@ public class WriteDataToExcel {
 
         // writing the data into the sheets
             for (String key : keyid) {
-
             row = spreadsheet.createRow(rowid++);
             Object[] objectArr = alertData.get(key);
             int cellid = 0;
-
             for (Object obj : objectArr) {
                 Cell cell = row.createCell(cellid++);
                 cell.setCellValue((String)obj);
             }
         }
-
-        // .xlsx is the format for Excel Sheets...
-        // writing the workbook into the file...
-        FileOutputStream out = new FileOutputStream(new File("C:/Users/lopez/OneDrive/Desktop/Projects/Development/alerts/GFGsheet.xlsx"));
+        FileOutputStream out = new FileOutputStream(new File("C:/Users/lopez/OneDrive/Desktop/Projects/Development/alerts/newAlerts.xlsx"));
             workbook.write(out);
             out.close();
+    }
+
+    public List<Alert> compareExcelFiles() throws IOException {
+        FileInputStream oldFile = new FileInputStream(new File("C:/Users/lopez/OneDrive/Desktop/Projects/Development/alerts/oldAlerts.xlsx"));
+        FileInputStream newfile = new FileInputStream(new File("C:/Users/lopez/OneDrive/Desktop/Projects/Development/alerts/newAlerts.xlsx"));
+        //Create Workbook instance holding reference to .xlsx file
+        XSSFWorkbook oldWorkbook = new XSSFWorkbook(oldFile);
+        XSSFWorkbook newWorkbook = new XSSFWorkbook(newfile);
+
+
+        //Get first/desired sheet from the workbook
+        XSSFSheet oldsheet = oldWorkbook.getSheetAt(0);
+        XSSFSheet newsheet = newWorkbook.getSheetAt(0);
+
+        //Iterate through each rows one by one
+        Iterator<Row> oldrowIterator = oldsheet.iterator();
+        Iterator<Row> newrowIterator = newsheet.iterator();
+
+        List<org.example.Alert> alertsToSend = new ArrayList<>();
+        Boolean found = false;
+
+        while (newrowIterator.hasNext()) {
+            found = false;
+            Row newrow = newrowIterator.next();
+            Cell newBodyContent = newrow.getCell(2);
+            while (oldrowIterator.hasNext()){
+                Row oldrow = oldrowIterator.next();
+                Cell oldBodyContent = oldrow.getCell(2);
+                if(oldBodyContent.getStringCellValue().equals(newBodyContent.getStringCellValue())){
+                    found = true;
+                }
+            }
+            if(!found){
+                //save the alert to be sent out
+                org.example.Alert toSend =
+                        new org.example.Alert(newrow.getCell(0).getStringCellValue(),newrow.getCell(1).getStringCellValue(),newrow.getCell(2).getStringCellValue());
+                alertsToSend.add(toSend);
+            }
+        }
+        oldFile.close();
+        newfile.close();
+        return alertsToSend;
+    }
+
+    public void saveOverOldAlerts() throws IOException {
+        FileInputStream file = new FileInputStream(new File("C:/Users/lopez/OneDrive/Desktop/Projects/Development/alerts/newAlerts.xlsx"));
+        Workbook wb = WorkbookFactory.create(file);
+        FileOutputStream fileout = new FileOutputStream("C:/Users/lopez/OneDrive/Desktop/Projects/Development/alerts/oldAlerts.xlsx");
+        wb.write(fileout);
+        fileout.close();
     }
 }
