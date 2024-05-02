@@ -42,3 +42,5 @@ Version 0.0.2: Application can now take the scraped html content and break it in
 Version 0.0.3: Application can now determine if the Alerts on the webpage are new from the last time the application was run. 
 
 Version 0.0.4: Application can now send out text messages with the new Alerts
+
+Version 1.0.0: Application is complete, once started will search for new E lin alerts every 8 hours and send messages for the new alerts

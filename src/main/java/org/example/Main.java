@@ -9,14 +9,28 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.IOException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         SeleniumConfig seleniumConfig = new SeleniumConfig();
         ChromeDriver driver = seleniumConfig.driver();
+        while(true){
+            Main main = new Main();
+            main.waitTime();
+            main.mainWithWait(driver);
+        }
+    }
+    public synchronized void waitTime() throws InterruptedException {
+        wait(28800000);
+        LocalTime currentTime = LocalTime.now();
+        System.out.println("Running, current time: " + currentTime);
+    }
+
+    public synchronized void mainWithWait(ChromeDriver driver) throws IOException {
         MyController controller = new MyController();
         List<WebElement> alertList = controller.controlELineAlertScrapper(driver);
 
@@ -41,14 +55,12 @@ public class Main {
 
         //full list of new alerts, already compared with old alerts file
         List<Alert> alertsToSend = writter.compareExcelFiles();
-        SendSMS sendSMS = new SendSMS();
-        sendSMS.sendSMS(alertsToSend);
+        if(!alertsToSend.isEmpty()) {
+            SendSMS sendSMS = new SendSMS();
+            sendSMS.sendSMS(alertsToSend);
+        }
         //saves the new alerts in the old alerts file so it can be compared later
         writter.saveOverOldAlerts();
-
-
-        driver.quit();
-
     }
 }
 
