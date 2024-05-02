@@ -20,14 +20,15 @@ public class Main {
         ChromeDriver driver = seleniumConfig.driver();
         while(true){
             Main main = new Main();
-            main.waitTime();
+            LocalTime currentTime = LocalTime.now();
+            System.out.println("Running, current time: " + currentTime);
             main.mainWithWait(driver);
+            main.waitTime();
         }
     }
     public synchronized void waitTime() throws InterruptedException {
+        System.out.println("Waiting 8 hours till next run.");
         wait(28800000);
-        LocalTime currentTime = LocalTime.now();
-        System.out.println("Running, current time: " + currentTime);
     }
 
     public synchronized void mainWithWait(ChromeDriver driver) throws IOException {
