@@ -16,6 +16,9 @@ to keep it hidden. You can either do the same or manually enter the phone number
 You may need to restart your computer for this to correctly populate your code. Below I have attached the names of
 the variables to help speed up the setup proccess.
 
+Create 1 empty excel file named oldAlerts and place it in the following folder
+User/name/OneDrive/Desktop/Development/Alerts/oldAlerts.xlsx
+
 ### Variable Names
 PersonalphoneNumber, TwiliophoneNumber, TwilioSID, TwilioToken
 
