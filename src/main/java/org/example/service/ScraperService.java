@@ -1,11 +1,9 @@
 package org.example.service;
 
-import org.example.configuation.SeleniumConfig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.*;
 
-import java.nio.file.WatchEvent;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
