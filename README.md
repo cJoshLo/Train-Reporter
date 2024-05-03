@@ -26,12 +26,9 @@ PersonalphoneNumber, TwiliophoneNumber, TwilioSID, TwilioToken
 
 # Description of Application
 
-This application is a web scrapper for a dynamic RTD website. The goal of the application 
-is to hava a reaccuring job to scrape the RTD E Line Alerts web page looking for new alert
-messages. If one is found the the rasberry pi that this application is running on will look 
-at the subscribers to the alert messaging system and send out a text message about the alert. 
-Beyond alerts this will also scan the website for significant delays for the E line and alert 
-the users about these as well. 
+This application is a web scrapper for the dynamic RTD train website. The goal of the application is to have a reoccurring job 
+to scrape the RTD E Line Alerts web page looking for new alert messages. If one is found the the raspberry pi that this application is 
+running on will look at the subscribers to the alert messaging system and send out a text message about the alert. 
 
 
 # Versioning
