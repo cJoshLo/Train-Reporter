@@ -10,9 +10,11 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.example.Alert;
 import org.openqa.selenium.WebElement;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+@Component
 public class WriteDataToExcel {
 
     public void writeToExcel(List<WebElement> headers, List<WebElement> subheaders, List<WebElement> bodyContents) throws IOException {
@@ -54,6 +56,7 @@ public class WriteDataToExcel {
     public List<Alert> compareExcelFiles() throws IOException {
         FileInputStream oldFile = new FileInputStream(new File(System.getenv("Alerts") + "/oldAlerts.xlsx"));
         FileInputStream newfile = new FileInputStream(new File(System.getenv("Alerts") + "/newAlerts.xlsx"));
+
         //Create Workbook instance holding reference to .xlsx file
         XSSFWorkbook oldWorkbook = new XSSFWorkbook(oldFile);
         XSSFWorkbook newWorkbook = new XSSFWorkbook(newfile);

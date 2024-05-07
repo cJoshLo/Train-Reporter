@@ -2,8 +2,15 @@ package org.example.configuation;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SeleniumConfig {
+
+    public SeleniumConfig(){
+        super();
+        System.out.println("Created selenium instance");
+    }
 
     public ChromeDriver driver(){
         ChromeOptions options = new ChromeOptions();

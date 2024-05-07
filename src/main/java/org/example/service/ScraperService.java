@@ -3,10 +3,12 @@ package org.example.service;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.*;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+@Component
 public class ScraperService {
 
     public static final String URL = "https://app.rtd-denver.com/route/E/alerts";
