@@ -43,4 +43,7 @@ Version 0.0.3: Application can now determine if the Alerts on the webpage are ne
 
 Version 0.0.4: Application can now send out text messages with the new Alerts
 
-Version 1.0.0: Application is complete, once started will search for new E lin alerts every 8 hours and send messages for the new alerts
+Version 1.0.0: Application is complete, once started will search for new E line alerts every 8 hours and send messages for the new alerts
+
+Version 1.0.1: Implemented dependency injection to clean up code and utilize spring
+
